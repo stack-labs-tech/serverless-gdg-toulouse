@@ -1,0 +1,24 @@
+service: 'stack-meetup-gdg-toulouse'
+
+provider:
+  name: aws
+  stage: ${opt:env, 'dev'}
+  runtime: nodejs8.10
+  region: 'eu-west-2'
+  environment:
+    S3_BUCKET_NAME: serverless-stack-labs-meetup-gdg-toulouse
+  variableSyntax: "\\${((?=self:|env:|opt:|ssm:|s3:|cf:|deep:|file\\()[ ~:a-zA-Z0-9._\\'\",\\-\\/\\(\\)]+?)}"
+
+package:
+  exclude:
+    - "**/*"
+  include:
+    - templates/lambdas/getPosts.js
+    - templates/lambdas/translator.js
+
+functions:
+  ${file(./templates/api.yml)}
+
+resources:
+  - ${file(./templates/static-website.yml)}
+  - ${file(./templates/iam.yml)}

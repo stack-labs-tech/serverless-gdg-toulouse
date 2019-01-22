@@ -1,0 +1,56 @@
+{
+  "name": "formation-libre-serverless",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "ssh://git-codecommit.eu-west-2.amazonaws.com/v1/repos/formation-libre-serverless",
+  "authors": [
+    "Laurent Noireterre <laurent.noireterre@stack-labs.com>",
+    "Chabane Refes <chabane.refes@stack-labs.com>",
+    "Arthur Sudre <arthur.sudre@stack-labs.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
+    "serverless": "^1.33.1",
+    "terser-webpack-plugin": "^1.1.0",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4"
+  },
+  "scripts": {
+    "sls": "sls deploy --aws-profile stack",
+    "build:prod": "webpack --mode=production --config webpack.config.prod.js",
+    "predeploy": "yarn build:prod",
+    "deploy": "AWS_PROFILE=stack aws s3 sync ./dist s3://serverless-stack-labs-meetup-gdg-toulouse",
+    "start": "webpack-dev-server --config webpack.config.dev.js",
+    "test": "jest",
+    "predocker:build": "yarn build:prod",
+    "docker:build": "docker build -t coffee-talk-serverless:latest .",
+    "docker:run": "docker run -p 8082:80 coffee-talk-serverless:latest",
+    "invoke": "serverless invoke local --function translator --path ./templates/mocks/translator.json --aws-profile stack"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.5.1",
+    "@material-ui/icons": "^3.0.1",
+    "babel-polyfill": "^6.26.0",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.6.2",
+    "react": "16.7.0-alpha.2",
+    "react-dom": "16.7.0-alpha.2"
+  }
+}

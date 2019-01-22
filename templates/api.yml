@@ -1,0 +1,20 @@
+getPosts:
+  name: get-posts
+  handler: templates/lambdas/getPosts.handler
+  events:
+    - http:
+        path: getPosts
+        method: get
+        cors:
+          origin: '*'
+          
+translator:
+  name: translator
+  handler: templates/lambdas/translator.handler
+  role: TranslateRole
+  events: 
+    - http:
+        path: translator
+        method: get
+        cors:
+          origin: '*'

@@ -1,0 +1,40 @@
+Resources:
+  S3BucketServerless:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${self:provider.environment.S3_BUCKET_NAME}
+      CorsConfiguration:
+        CorsRules:
+          -
+            AllowedOrigins:
+              - '*'
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+            MaxAge: 3000
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+  S3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: S3BucketServerless
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: '*'
+            Action:
+            - s3:GetObject
+            Resource:
+              Fn::Join: [
+                "", [
+                  "arn:aws:s3:::",
+                  {
+                    "Ref": "S3BucketServerless"
+                  },
+                  "/*"
+                ]
+              ]
