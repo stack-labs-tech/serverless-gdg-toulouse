@@ -1,12 +1,12 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-const sdk = require('aws-sdk');
-
-const translate = new sdk.Translate({ region: 'eu-west-1' });
-
 const handler = async (event) => {
+  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
+  const { Translate } = require('aws-sdk');
+
+  const translate = new Translate({ region: 'eu-west-1' });
+
   const { queryStringParameters: qp } = event;
   const parameters = {
-    Text: (qp && qp.text) ? qp.text : '',
+    Text: qp && qp.text ? qp.text : '',
     SourceLanguageCode: 'fr',
     TargetLanguageCode: 'en',
   };
