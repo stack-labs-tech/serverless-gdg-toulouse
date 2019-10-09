@@ -3,7 +3,7 @@ const sdk = require('aws-sdk');
 
 const translate = new sdk.Translate({ region: 'eu-west-1' });
 
-exports.handler = async (event) => {
+const handler = async (event) => {
   const { queryStringParameters: qp } = event;
   const parameters = {
     Text: (qp && qp.text) ? qp.text : '',
@@ -22,4 +22,8 @@ exports.handler = async (event) => {
     isBase64Encoded: false,
   };
   return response;
+};
+
+module.exports = {
+  handler,
 };
