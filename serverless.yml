@@ -1,12 +1,12 @@
-service: 'stack-meetup-gdg-toulouse'
+service: 'stack-coffee-talk-cls'
 
 provider:
   name: aws
   stage: ${opt:env, 'dev'}
   runtime: nodejs8.10
-  region: 'eu-west-2'
+  region: 'eu-west-1'
   environment:
-    S3_BUCKET_NAME: serverless-stack-labs-meetup-gdg-toulouse
+    S3_BUCKET_NAME: serverless-stack-labs-coffee-talk-cls
   variableSyntax: "\\${((?=self:|env:|opt:|ssm:|s3:|cf:|deep:|file\\()[ ~:a-zA-Z0-9._\\'\",\\-\\/\\(\\)]+?)}"
 
 package:

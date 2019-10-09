@@ -14,6 +14,7 @@ Resources:
       Path: "/"
       ManagedPolicyArns: 
         - "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+
   Account:
     Type: AWS::ApiGateway::Account
     Properties: 
@@ -21,6 +22,7 @@ Resources:
         "Fn::GetAtt": 
           - CloudWatchRole
           - Arn
+
   TranslateRole:
     Type: AWS::IAM::Role
     Properties:

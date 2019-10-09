@@ -36,7 +36,7 @@
     "sls": "sls deploy --aws-profile stack",
     "build:prod": "webpack --mode=production --config webpack.config.prod.js",
     "predeploy": "yarn build:prod",
-    "deploy": "AWS_PROFILE=stack aws s3 sync ./dist s3://serverless-stack-labs-meetup-gdg-toulouse",
+    "deploy": "AWS_PROFILE=stack aws s3 sync ./dist s3://serverless-stack-labs-coffee-talk-cls",
     "start": "webpack-dev-server --config webpack.config.dev.js",
     "test": "jest",
     "predocker:build": "yarn build:prod",
